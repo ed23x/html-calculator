@@ -11,7 +11,7 @@
             <input id="display" readonly />
 
             <div id="keys">
-                <!-- Header with Toggle and AC Button -->
+                <!-- Header with Toggle, Equals, and AC Button -->
                 <div class="calculator-header">
                     <button
                         id="scientific-toggle"
@@ -19,6 +19,7 @@
                     >
                         Wissenschaftlich
                     </button>
+                    <button onclick="calculate()" class="equals-button">=</button>
                     <button onclick="clearDisplay()" class="clear-button">AC</button>
                 </div>
 
@@ -72,7 +73,6 @@
                         <button onclick="appendToDisplay('/')">/</button>
                         <button onclick="appendToDisplay('0')">0</button>
                         <button onclick="appendToDisplay('.')">.</button>
-                        <button onclick="calculate()">=</button>
                     </div>
                 </div>
             </div>

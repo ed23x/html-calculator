@@ -131,11 +131,8 @@ body {
     margin-bottom: 15px;
 }
 
-/* The scientific toggle button */
-#scientific-toggle {
-    background-color: #607d8b; /* A neutral greyish-blue */
-    color: white;
-    flex: 1;
+/* Header buttons common styles */
+.calculator-header > button {
     padding: 15px;
     font-size: 1.2em;
     border: none;
@@ -144,17 +141,40 @@ body {
     transition: background-color 0.2s;
 }
 
+/* The scientific toggle button */
+#scientific-toggle {
+    background-color: #607d8b; /* A neutral greyish-blue */
+    color: white;
+    flex: 1;
+}
+
+/* Equals button */
+.equals-button {
+    background-color: #4CAF50; /* Green color for equals */
+    color: white;
+    width: 60px;
+}
+
+.equals-button:hover {
+    background-color: #45a049;
+}
+
 /* Clear (AC) button */
 .clear-button {
     background-color: #dc3545;
     color: white;
     width: 60px;
-    padding: 15px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+}
+
+/* Dark mode for equals button */
+@media (prefers-color-scheme: dark) {
+    .equals-button {
+        background-color: #2e7d32;
+    }
+    
+    .equals-button:hover {
+        background-color: #1b5e20;
+    }
 }
 
 .clear-button:hover {
