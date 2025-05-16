@@ -34,7 +34,6 @@ function calculate() {
     expression = expression.replace(/pi/g, "Math.PI"); // Replace pi constant
     expression = expression.replace(/e/g, "Math.E"); // Replace e constant
     expression = expression.replace(/\^/g, "**"); // Replace ^ with ** for exponentiation
-    // Add new functions
     expression = expression.replace(/abs\(/g, "Math.abs(");
     expression = expression.replace(/ceil\(/g, "Math.ceil(");
     expression = expression.replace(/floor\(/g, "Math.floor(");
