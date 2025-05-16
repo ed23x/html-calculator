@@ -11,13 +11,16 @@
             <input id="display" readonly />
 
             <div id="keys">
-                <!-- Toggle Button -->
-                <button
-                    id="scientific-toggle"
-                    onclick="toggleWissenschaftlichMode()"
-                >
-                    Wissenschaftlich
-                </button>
+                <!-- Header with Toggle and AC Button -->
+                <div class="calculator-header">
+                    <button
+                        id="scientific-toggle"
+                        onclick="toggleWissenschaftlichMode()"
+                    >
+                        Wissenschaftlich
+                    </button>
+                    <button onclick="clearDisplay()" class="clear-button">AC</button>
+                </div>
 
                 <!-- Container for both keypads -->
                 <div id="keypads-container">
@@ -70,7 +73,6 @@
                         <button onclick="appendToDisplay('0')">0</button>
                         <button onclick="appendToDisplay('.')">.</button>
                         <button onclick="calculate()">=</button>
-                        <button onclick="clearDisplay()">AC</button>
                     </div>
                 </div>
             </div>

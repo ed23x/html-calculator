@@ -1,4 +1,3 @@
-{{REWRITTEN_CODE}}
 /* Utility classes for hiding elements */
 .hidden-section {
     display: none !important; /* Use !important to ensure hiding works */
@@ -124,18 +123,52 @@ body {
     flex-direction: column;
 }
 
+/* Calculator header */
+.calculator-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
 /* The scientific toggle button */
 #scientific-toggle {
     background-color: #607d8b; /* A neutral greyish-blue */
     color: white;
-    width: 100%;
-    margin-bottom: 15px;
+    flex: 1;
     padding: 15px;
     font-size: 1.2em;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
+}
+
+/* Clear (AC) button */
+.clear-button {
+    background-color: #dc3545;
+    color: white;
+    width: 60px;
+    padding: 15px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clear-button:hover {
+    background-color: #c82333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .clear-button {
+        background-color: #c82333;
+    }
+    
+    .clear-button:hover {
+        background-color: #a71d2a;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
