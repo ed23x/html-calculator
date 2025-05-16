@@ -21,39 +21,33 @@ function calculate() {
     return;
   }
 
-  // Automatically close unclosed parentheses and function calls
-  const openParens = (expression.match(/\(/g) || []).length;
-  const closeParens = (expression.match(/\)/g) || []).length;
+  // First, close any unclosed function calls
+  expression = expression.replace(/(sin|cos|tan|sqrt|ln|log|abs|ceil|floor|round)\(([^)]*)$/g, (match, func, inner) => {
+    return `${func}(${inner})`;
+  });
+  
+  // Then close any remaining unclosed parentheses
+  let openCount = 0;
+  for (let i = 0; i < expression.length; i++) {
+    if (expression[i] === '(') openCount++;
+    if (expression[i] === ')') openCount--;
+  }
   
   // Add missing closing parentheses
-  if (openParens > closeParens) {
-    expression += '\)'.repeat(openParens - closeParens);
+  if (openCount > 0) {
+    expression += ')'.repeat(openCount);
   }
 
   try {
-    // Handle other functions with automatic closing of parentheses
-    const functionNames = ['sin', 'cos', 'tan', 'sqrt', 'abs', 'ceil', 'floor', 'round'];
-    functionNames.forEach(func => {
-      const regex = new RegExp(`${func}\\(([^)]*)$`);
-      if (regex.test(expression)) {
-        expression = expression.replace(regex, `${func}($1)`);
-      }
-    });
-    
     // Preprocess the expression to replace scientific notation with Math equivalents
     // WARNING: Using eval() with user input is potentially dangerous.
     // A dedicated math expression parser is recommended for better security and robustness.
-    expression = expression.replace(/sin\(/g, "Math.sin(");
-    expression = expression.replace(/cos\(/g, "Math.cos(");
-    expression = expression.replace(/tan\(/g, "Math.tan(");
-    expression = expression.replace(/sqrt\(/g, "Math.sqrt(");
-    // Handle ln and log functions with proper closing parentheses
-    expression = expression.replace(/ln\(([^)]*)$/, "ln($1)");
-    expression = expression.replace(/log\(([^)]*)$/, "log($1)");
-    
-    // Now replace with Math functions
-    expression = expression.replace(/ln\(/g, "Math.log("); // Natural logarithm (Math.log)
-    expression = expression.replace(/log\(/g, "Math.log10("); // Base 10 logarithm (Math.log10)
+    expression = expression.replace(/sin\(/g, "Math.sin(")
+      .replace(/cos\(/g, "Math.cos(")
+      .replace(/tan\(/g, "Math.tan(")
+      .replace(/sqrt\(/g, "Math.sqrt(")
+      .replace(/ln\(/g, "Math.log(")     // Natural logarithm
+      .replace(/log\(/g, "Math.log10(")   // Base 10 logarithm
     expression = expression.replace(/pi/g, "Math.PI"); // Replace pi constant
     expression = expression.replace(/e/g, "Math.E"); // Replace e constant
     expression = expression.replace(/\^/g, "**"); // Replace ^ with ** for exponentiation
