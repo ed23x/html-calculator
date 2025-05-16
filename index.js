@@ -21,7 +21,25 @@ function calculate() {
     return;
   }
 
+  // Automatically close unclosed parentheses and function calls
+  const openParens = (expression.match(/\(/g) || []).length;
+  const closeParens = (expression.match(/\)/g) || []).length;
+  
+  // Add missing closing parentheses
+  if (openParens > closeParens) {
+    expression += '\)'.repeat(openParens - closeParens);
+  }
+
   try {
+    // Handle other functions with automatic closing of parentheses
+    const functionNames = ['sin', 'cos', 'tan', 'sqrt', 'abs', 'ceil', 'floor', 'round'];
+    functionNames.forEach(func => {
+      const regex = new RegExp(`${func}\\(([^)]*)$`);
+      if (regex.test(expression)) {
+        expression = expression.replace(regex, `${func}($1)`);
+      }
+    });
+    
     // Preprocess the expression to replace scientific notation with Math equivalents
     // WARNING: Using eval() with user input is potentially dangerous.
     // A dedicated math expression parser is recommended for better security and robustness.
@@ -29,6 +47,11 @@ function calculate() {
     expression = expression.replace(/cos\(/g, "Math.cos(");
     expression = expression.replace(/tan\(/g, "Math.tan(");
     expression = expression.replace(/sqrt\(/g, "Math.sqrt(");
+    // Handle ln and log functions with proper closing parentheses
+    expression = expression.replace(/ln\(([^)]*)$/, "ln($1)");
+    expression = expression.replace(/log\(([^)]*)$/, "log($1)");
+    
+    // Now replace with Math functions
     expression = expression.replace(/ln\(/g, "Math.log("); // Natural logarithm (Math.log)
     expression = expression.replace(/log\(/g, "Math.log10("); // Base 10 logarithm (Math.log10)
     expression = expression.replace(/pi/g, "Math.PI"); // Replace pi constant

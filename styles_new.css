@@ -169,35 +169,47 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  flex: 1 1 300px;               /* wächst, schrumpft, Basis 300px */
-  min-width: 200px;              /* nie schmaler als 200px */
-  transition: flex-basis var(--calculator-transition);
+  width: 100%;                   /* Take full width in standard mode */
+  transition: all var(--calculator-transition);
   margin-top: 0;                 /* Entfernt übermäßigen Abstand nach oben */
+}
+
+/* In scientific mode, standard keys take less width */
+.scientific-mode #standard-keys-container {
+  flex: 1 1 52%;                /* ca. 52% der Breite */
+  max-width: 52%;               /* Begrenzt die maximale Breite */
+  margin-right: 20px;            /* Add some space between keypads */
 }
 
 /* Wissenschaftliches Keypad (im Standard‑Modus unsichtbar) */
 #scientific-keys {
-  display: grid;
+  display: none;                  /* Completely hide in standard mode */
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;                      /* Kleinerer Abstand zwischen Scientific-Buttons */
-  flex: 1 1 200px;               /* wächst, schrumpft, Basis 200px */
-  min-width: 200px;              /* nie schmaler als 200px */
+  flex: 0 0 0;                   /* Don't take up space in standard mode */
+  width: 0;                      /* No width in standard mode */
   opacity: 0;
-  max-height: 0;                 /* Versteckt im Standard-Modus */
-  transition: flex-basis var(--calculator-transition), opacity var(--calculator-transition), max-height var(--calculator-transition);
+  transition: all var(--calculator-transition);
+  overflow: hidden;              /* Ensure content doesn't leak */
 }
 
-/* Im Wissenschafts‑Modus: beide nebeneinander, passen sich an */
-.scientific-mode #standard-keys-container {
-  flex-basis: 52%;               /* ca. 52% der Breite */
-  max-width: 52%;                /* Begrenzt die maximale Breite */
+/* Keypads container in scientific mode */
+.scientific-mode #keypads-container {
+  display: flex;                 /* Side by side layout */
+  flex-wrap: nowrap;             /* Prevent wrapping */
+  justify-content: space-between; /* Space between keypads */
+  width: 100%;                   /* Full width */
 }
 
 .scientific-mode #scientific-keys {
-  flex-basis: 43%;               /* ca. 43% der Breite */
-  max-width: 43%;                /* Begrenzt die maximale Breite */
+  display: grid;                 /* Show in scientific mode */
+  flex: 1 1 43%;                /* ca. 43% der Breite */
+  max-width: 43%;               /* Begrenzt die maximale Breite */
+  width: auto;                  /* Allow natural width */
   opacity: 1;
-  max-height: 500px;             /* Ausreichend groß für alle Buttons */
+  max-height: 500px;            /* Ausreichend groß für alle Buttons */
+  padding: 0;                   /* Reset any padding */
+  margin: 0;                    /* Reset any margins */
 }
 
 /* General button styles */
