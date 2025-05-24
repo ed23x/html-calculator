@@ -5,7 +5,23 @@ const scientificKeys = document.getElementById("scientific-keys");
 const scientificToggle = document.getElementById("scientific-toggle");
 
 function appendToDisplay(input) {
-  display.value += input;
+  const oldSelectionStart = display.selectionStart;
+  const oldSelectionEnd = display.selectionEnd;
+  const currentValue = display.value;
+
+  const newValue = 
+    currentValue.substring(0, oldSelectionStart) + 
+    input + 
+    currentValue.substring(oldSelectionEnd);
+
+  display.value = newValue;
+
+  // Set new cursor position
+  const newCursorPos = oldSelectionStart + input.length;
+  display.selectionStart = display.selectionEnd = newCursorPos;
+
+  // Maintain focus on the display
+  display.focus();
 }
 
 function clearDisplay() {
@@ -91,4 +107,33 @@ document.addEventListener("DOMContentLoaded", function () {
   const calculator = document.getElementById("calculator");
   calculator.classList.remove("scientific-mode");
   scientificToggle.textContent = "Wissenschaftlich";
+
+  // Add keydown event listener for direct keyboard input on the display
+  display.addEventListener("keydown", function(event) {
+    const key = event.key;
+
+    // Handle Enter key for calculation
+    if (key === "Enter") {
+      calculate();
+      event.preventDefault(); // Prevent default action (e.g., newline)
+      return; // Stop further processing for Enter key
+    }
+
+    const allowedChars = "0123456789+-*/^().";
+    const allowedControlKeys = [
+      "Backspace", "Delete", "ArrowLeft", "ArrowRight", 
+      "Home", "End", "Tab"
+    ];
+
+    // Allow if the key is a number, an allowed operator/char, or an allowed control key
+    if (allowedChars.includes(key) || allowedControlKeys.includes(key)) {
+      // If it's an allowed key, let the default action proceed.
+      // For numbers and operators, this means they will be inserted at the cursor.
+      // For control keys, their default behavior (like deleting or moving cursor) will work.
+      return; 
+    }
+
+    // If it's any other key (e.g., 'a', 'b', '$'), prevent it from being entered
+    event.preventDefault();
+  });
 });
