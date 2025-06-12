@@ -37,6 +37,28 @@ function calculate() {
     return;
   }
 
+  // New preprocessing step for functions followed directly by a number, e.g., ln5 -> ln(5)
+  const funcNames = ["sin", "cos", "tan", "sqrt", "ln", "log", "abs", "ceil", "floor", "round"];
+  funcNames.forEach(func => {
+      // Regex to find funcName followed by a number (integer or decimal)
+      // It avoids matching if already followed by '(', e.g., sin(5)
+      // It ensures the function name is not part of a larger word (e.g. 'asin')
+      // It handles numbers like 5, 5.5, .5
+      // Breakdown:
+      // (?<=\W|^) - Lookbehind for non-word char or start of string
+      // (${func}) - Capture the specific function name
+      // (?![\w\(]) - Negative lookahead: not followed by a word char or an opening parenthesis
+      // (\d*\.?\d+) - Capture the number (e.g., 5, 5.2, .5)
+      // This regex was refined to be simpler and more targeted:
+      // const regex = new RegExp(`(?<=\\W|^)(${func})(?!\\w|\\()(\\d*\\.?\\d+)`, "g");
+      // Corrected Regex:
+      // It avoids matching if already followed by '(', e.g., sin(5) - this is handled by (?!\()
+      // It ensures the function name is not part of a larger word (e.g. 'asin') - this is handled by (?<=\W|^)
+      // It handles numbers like 5, 5.5, .5
+      const regex = new RegExp("(?<=\\W|^)(" + func + ")(\\d*\\.?\\d+)(?!\\()", "g");
+      expression = expression.replace(regex, '$1($2)');
+  });
+
   // First, close any unclosed function calls
   expression = expression.replace(/(sin|cos|tan|sqrt|ln|log|abs|ceil|floor|round)\(([^)]*)$/g, (match, func, inner) => {
     return `${func}(${inner})`;
