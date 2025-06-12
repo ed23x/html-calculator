@@ -3,48 +3,70 @@
     display: none !important; /* Use !important to ensure hiding works */
 }
 
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
 /* Root variables for theming */
 :root {
-    /* Light mode colors */
-    --background-color-light: #f0f0f0;
-    --text-color-light: #333;
-    --calculator-bg-light: #ffffff;
-    --display-bg-light: #e9e9e9;
-    --button-bg-light: #f9f9f9;
-    --button-hover-light: #e0e0e0;
-    --button-operator-light: #a0a0a0;
-    --button-operator-hover-light: #808080;
-    --button-equal-light: #007bff;
-    --button-equal-hover-light: #0056b3;
-    --button-clear-light: #dc3545;
-    --button-clear-hover-light: #c82333;
-    --border-color-light: #ccc;
-    --box-shadow-light: rgba(0, 0, 0, 0.1);
+    /* Typography */
+    --font-family-apple: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    /* Dark mode colors */
-    --background-color-dark: #1e1e1e;
-    --text-color-dark: #f0f0f0;
-    --calculator-bg-dark: #2b2b2b;
-    --display-bg-dark: #3a3a3a;
-    --button-bg-dark: #424242;
-    --button-hover-dark: #505050;
-    --button-operator-dark: #6a6a6a;
-    --button-operator-hover-dark: #7a7a7a;
-    --button-equal-dark: #0056b3;
-    --button-equal-hover-dark: #003f8f;
-    --button-clear-dark: #c82333;
-    --button-clear-hover-dark: #a71d2a;
-    --border-color-dark: #555;
-    --box-shadow-dark: rgba(0, 0, 0, 0.3);
+    /* Border Radii */
+    --border-radius-subtle: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 15px;
 
-    /* Calculator dimensions */
+    /* Light Mode Colors */
+    --background-color-light: #f0f0f0; /* Existing: #f0f0f0 */
+    --text-color-light: #333; /* Existing: #333 */
+    --calculator-bg-light: #ffffff; /* Existing: #ffffff */
+    --display-bg-light: #e9e9e9; /* Existing: #e9e9e9 */
+    --button-bg-light: #f9f9f9; /* Existing: #f9f9f9 */
+    --button-hover-light: #e0e0e0; /* Existing: #e0e0e0 */
+    /* --button-operator-bg-light: #6c6c6c; -- Removed, no longer used as operators use accent colors and scientific toggle/keys use other specific variables */
+    /* --button-operator-hover-bg-light: #545454; -- Removed */
+    --button-accent-bg-light: #007AFF; /* Apple Blue */
+    --button-accent-hover-bg-light: #005EC4; /* Apple Blue Hover */
+    /* --button-danger-bg-light: #dc3545; -- Removed, no longer used */
+    /* --button-danger-hover-bg-light: #c82333; -- Removed, no longer used */
+    --border-color-light: #d1d1d1; /* Adjusted Neutral Gray */
+    --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --box-shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    /* Dark Mode Colors (placeholders, will be adjusted in prefers-color-scheme) */
+    --background-color-dark: #1c1c1e; /* Adjusted Neutral Gray */
+    --text-color-dark: #f0f0f0; 
+    --calculator-bg-dark: #2c2c2e; /* Adjusted Neutral Gray */
+    --display-bg-dark: #3a3a3c; /* Adjusted Neutral Gray */
+    --button-bg-dark: #3a3a3c; /* Adjusted Neutral Gray */
+    --button-hover-dark: #4a4a4c; /* Adjusted Neutral Gray Hover */
+    --button-secondary-bg-light: #e5e5ea;
+    --button-secondary-hover-light: #d1d1d6;
+    --button-secondary-bg-dark: #48484a;
+    --button-secondary-hover-dark: #58585a;
+    /* --button-operator-bg-dark: #545454; -- Removed */
+    /* --button-operator-hover-bg-dark: #6c6c6c; -- Removed */
+    --button-accent-bg-dark: #0A84FF; /* Apple Blue Dark */
+    --button-accent-hover-bg-dark: #0060D0; /* Apple Blue Dark Hover */
+    /* --button-danger-bg-dark: #c82333; -- Removed, no longer used */
+    /* --button-danger-hover-bg-dark: #a71d2a; -- Removed, no longer used */
+    --border-color-dark: #444446; /* Adjusted Neutral Gray */
+    
+    /* Accent Colors */
+    --accent-blue-light: #007AFF;
+    --accent-blue-hover-light: #005EC4;
+    --accent-blue-dark: #0A84FF;
+    --accent-blue-hover-dark: #0060D0;
+    
+    /* Dimensions & Transitions */
     --calculator-width-standard: 350px;
     --calculator-width-scientific: 650px;
     --calculator-transition: 0.3s ease;
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-family-apple);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,20 +79,50 @@ body {
         color 0.3s;
 }
 
+/* Dark Mode Variable Overrides */
 @media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode Colors */
+        --background-color-dark: #1c1c1e; /* Adjusted Neutral Gray */
+        --text-color-dark: #f0f0f0; 
+        --calculator-bg-dark: #2c2c2e; /* Adjusted Neutral Gray */
+        --display-bg-dark: #3a3a3c; /* Adjusted Neutral Gray - not used for display if transparent */
+        --button-bg-dark: #3a3a3c; /* Adjusted Neutral Gray */
+        --button-hover-dark: #4a4a4c; /* Adjusted Neutral Gray Hover */
+        --button-secondary-bg-dark: #48484a; /* Already defined above, ensuring it's here for dark mode context */
+        --button-secondary-hover-dark: #58585a; /* Already defined above */
+        /* --button-operator-bg-dark: #545454; -- Removed */
+        /* --button-operator-hover-bg-dark: #6c6c6c; -- Removed */
+        --button-accent-bg-dark: var(--accent-blue-dark);
+        --button-accent-hover-bg-dark: var(--accent-blue-hover-dark);
+        /* --button-danger-bg-dark: #c82333; -- Removed */
+        /* --button-danger-hover-bg-dark: #a71d2a; -- Removed */
+        --border-color-dark: #444446; /* Adjusted Neutral Gray */
+        /* --box-shadow-dark is already defined in the main :root and used below */
+    }
     body {
         background-color: var(--background-color-dark);
         color: var(--text-color-dark);
     }
 }
 
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
+
+body { /* Already styled above, just ensuring it's grouped conceptually here */ }
+
+/* ==========================================================================
+   Component Styles
+   ========================================================================== */
+
 /* Calculator container */
 #calculator {
-    border: 1px solid var(--border-color-light);
-    border-radius: 15px;
-    padding: 20px;
+    border: 1px solid var(--border-color-light); /* Kept subtle border */
+    border-radius: var(--border-radius-large);
+    padding: 25px; /* Increased padding for a more spacious look */
     background-color: var(--calculator-bg-light);
-    box-shadow: 0 10px 20px var(--box-shadow-light);
+    box-shadow: var(--box-shadow-light);
     width: var(--calculator-width-standard);
     transition:
         width var(--calculator-transition),
@@ -89,19 +141,21 @@ body {
     #calculator {
         border-color: var(--border-color-dark);
         background-color: var(--calculator-bg-dark);
-        box-shadow: 0 10px 20px var(--box-shadow-dark);
+        box-shadow: var(--box-shadow-dark); /* Using the globally defined dark box shadow */
     }
 }
 
+/* Display */
 #display {
     width: 100%;
-    margin-bottom: 20px;
-    padding: 15px 10px;
-    font-size: 2.5em;
+    margin-bottom: 25px; /* Increased margin */
+    padding: 20px 15px; /* Increased padding */
+    font-family: var(--font-family-apple); /* Using Apple font for consistency */
+    font-size: 3em; /* Increased font size */
     text-align: right;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--display-bg-light);
+    border: none; /* Removed border */
+    border-radius: var(--border-radius-medium);
+    background-color: transparent; /* Transparent background */
     color: var(--text-color-light);
     outline: none;
     transition:
@@ -112,11 +166,12 @@ body {
 
 @media (prefers-color-scheme: dark) {
     #display {
-        background-color: var(--display-bg-dark);
+        /* background-color: var(--display-bg-dark); Keeping transparent for dark mode too */
         color: var(--text-color-dark);
     }
 }
 
+/* Keys & Keypads */
 /* Keys container - horizontal layout */
 #keys {
     display: flex;
@@ -136,74 +191,77 @@ body {
     padding: 15px;
     font-size: 1.2em;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius-medium);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 /* The scientific toggle button */
 #scientific-toggle {
-    background-color: #607d8b; /* A neutral greyish-blue */
-    color: white;
+    background-color: var(--button-bg-light);
+    color: var(--accent-blue-light);
     flex: 1;
+}
+
+#scientific-toggle:hover {
+    background-color: var(--button-hover-light);
+    /* color: var(--accent-blue-light); remains unchanged */
+}
+
+@media (prefers-color-scheme: dark) {
+    #scientific-toggle {
+        background-color: var(--button-bg-dark);
+        color: var(--accent-blue-dark);
+    }
+    #scientific-toggle:hover {
+        background-color: var(--button-hover-dark);
+        /* color: var(--accent-blue-dark); remains unchanged */
+    }
 }
 
 /* Equals button */
 .equals-button {
-    background-color: #2746d0;
+    background-color: var(--accent-blue-light); 
     color: white;
     width: 60px;
 }
 
 .equals-button:hover {
-    background-color: #45a049;
+    background-color: var(--accent-blue-hover-light);
 }
 
-/* Clear (AC) button */
-.clear-button {
-    background-color: #dc3545;
-    color: white;
-    width: 60px;
-}
-
-/* Dark mode for equals button */
 @media (prefers-color-scheme: dark) {
     .equals-button {
-        background-color: #2e7d32;
+        background-color: var(--accent-blue-dark);
+        /* color: white; is already set */
     }
     
     .equals-button:hover {
-        background-color: #1b5e20;
+        background-color: var(--accent-blue-hover-dark);
     }
 }
 
+/* Clear (AC) button */
+.clear-button { /* Header AC Button */
+    background-color: var(--button-bg-light);
+    color: var(--accent-blue-light);
+    width: 60px;
+}
+
 .clear-button:hover {
-    background-color: #c82333;
+    background-color: var(--button-hover-light);
+    /* color: var(--accent-blue-light); remains unchanged */
 }
 
 @media (prefers-color-scheme: dark) {
     .clear-button {
-        background-color: #c82333;
+        background-color: var(--button-bg-dark);
+        color: var(--accent-blue-dark);
     }
     
     .clear-button:hover {
-        background-color: #a71d2a;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    #scientific-toggle {
-        background-color: #455a64;
-    }
-}
-
-#scientific-toggle:hover {
-    background-color: #546e7a;
-}
-
-@media (prefers-color-scheme: dark) {
-    #scientific-toggle:hover {
-        background-color: #37474f;
+        background-color: var(--button-hover-dark);
+        /* color: var(--accent-blue-dark); remains unchanged */
     }
 }
 
@@ -267,10 +325,11 @@ body {
 
 /* General button styles */
 button {
-    padding: 20px 10px;
+    font-family: var(--font-family-apple);
+    padding: 18px 10px; /* Adjusted padding slightly */
     font-size: 1.2em;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius-medium);
     cursor: pointer;
     transition:
         background-color 0.2s,
@@ -306,110 +365,101 @@ button:active {
 }
 
 /* Operator buttons */
-#standard-keys-container button:nth-child(1),  /* + */
-#standard-keys-container button:nth-child(5),  /* - */
-#standard-keys-container button:nth-child(9),  /* * */
-#standard-keys-container button:nth-child(13) {
-    /* / */
-    background-color: var(--button-operator-light);
+#standard-keys-container button.operator {
+    background-color: var(--accent-blue-light);
     color: white;
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(1),
-    #standard-keys-container button:nth-child(5),
-    #standard-keys-container button:nth-child(9),
-    #standard-keys-container button:nth-child(13) {
-        background-color: var(--button-operator-dark);
+    #standard-keys-container button.operator {
+        background-color: var(--accent-blue-dark);
+        /* color: white; is already set */
     }
 }
 
-#standard-keys-container button:nth-child(1):hover,
-#standard-keys-container button:nth-child(5):hover,
-#standard-keys-container button:nth-child(9):hover,
-#standard-keys-container button:nth-child(13):hover {
-    background-color: var(--button-operator-hover-light);
+#standard-keys-container button.operator:hover {
+    background-color: var(--accent-blue-hover-light);
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(1):hover,
-    #standard-keys-container button:nth-child(5):hover,
-    #standard-keys-container button:nth-child(9):hover,
-    #standard-keys-container button:nth-child(13):hover {
-        background-color: var(--button-operator-hover-dark);
+    #standard-keys-container button.operator:hover {
+        background-color: var(--accent-blue-hover-dark);
     }
 }
 
 /* Equals button */
-#standard-keys-container button:nth-child(16) {
-    /* = */
-    background-color: var(--button-equal-light);
+#standard-keys-container button.equals {
+    background-color: var(--button-accent-bg-light);
     color: white;
     grid-column: span 2;
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(16) {
-        background-color: var(--button-equal-dark);
+    #standard-keys-container button.equals {
+        background-color: var(--button-accent-bg-dark);
     }
 }
 
-#standard-keys-container button:nth-child(16):hover {
-    background-color: var(--button-equal-hover-light);
+#standard-keys-container button.equals:hover {
+    background-color: var(--button-accent-hover-bg-light);
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(16):hover {
-        background-color: var(--button-equal-hover-dark);
+    #standard-keys-container button.equals:hover {
+        background-color: var(--button-accent-hover-bg-dark);
     }
 }
 
 /* Clear button */
-#standard-keys-container button:nth-child(17) {
-    /* AC */
-    background-color: var(--button-clear-light);
-    color: white;
+#standard-keys-container button.clear { /* Keypad AC Button */
+    background-color: var(--button-bg-light);
+    color: var(--accent-blue-light);
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(17) {
-        background-color: var(--button-clear-dark);
+    #standard-keys-container button.clear {
+        background-color: var(--button-bg-dark);
+        color: var(--accent-blue-dark);
     }
 }
 
-#standard-keys-container button:nth-child(17):hover {
-    background-color: var(--button-clear-hover-light);
+#standard-keys-container button.clear:hover {
+    background-color: var(--button-hover-light);
+    /* color: var(--accent-blue-light); remains unchanged */
 }
 
 @media (prefers-color-scheme: dark) {
-    #standard-keys-container button:nth-child(17):hover {
-        background-color: var(--button-clear-hover-dark);
+    #standard-keys-container button.clear:hover {
+        background-color: var(--button-hover-dark);
+        /* color: var(--accent-blue-dark); remains unchanged */
     }
 }
 
 /* Scientific buttons */
 #scientific-keys button {
-    background-color: #4caf50; /* Green color */
-    color: white;
+    background-color: var(--button-secondary-bg-light);
+    color: var(--text-color-light);
     padding: 15px 5px;         /* Etwas kleinere Buttons */
     font-size: 1.1em;          /* Etwas kleinere Schrift */
 }
 
+#scientific-keys button:hover {
+    background-color: var(--button-secondary-hover-light);
+}
+
 @media (prefers-color-scheme: dark) {
     #scientific-keys button {
-        background-color: #388e3c; /* Darker green */
+        background-color: var(--button-secondary-bg-dark);
+        color: var(--text-color-dark);
     }
-}
-
-#scientific-keys button:hover {
-    background-color: #388e3c; /* Darker green on hover */
-}
-
-@media (prefers-color-scheme: dark) {
     #scientific-keys button:hover {
-        background-color: #2e7d32; /* Even darker green */
+        background-color: var(--button-secondary-hover-dark);
     }
 }
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
 
 /* Responsive adjustments */
 @media (max-width: 750px) {
