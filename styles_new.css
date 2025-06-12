@@ -24,12 +24,8 @@
     --display-bg-light: #e9e9e9; /* Existing: #e9e9e9 */
     --button-bg-light: #f9f9f9; /* Existing: #f9f9f9 */
     --button-hover-light: #e0e0e0; /* Existing: #e0e0e0 */
-    /* --button-operator-bg-light: #6c6c6c; -- Removed, no longer used as operators use accent colors and scientific toggle/keys use other specific variables */
-    /* --button-operator-hover-bg-light: #545454; -- Removed */
     --button-accent-bg-light: #007AFF; /* Apple Blue */
     --button-accent-hover-bg-light: #005EC4; /* Apple Blue Hover */
-    /* --button-danger-bg-light: #dc3545; -- Removed, no longer used */
-    /* --button-danger-hover-bg-light: #c82333; -- Removed, no longer used */
     --border-color-light: #d1d1d1; /* Adjusted Neutral Gray */
     --box-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
     --box-shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -45,12 +41,8 @@
     --button-secondary-hover-light: #d1d1d6;
     --button-secondary-bg-dark: #48484a;
     --button-secondary-hover-dark: #58585a;
-    /* --button-operator-bg-dark: #545454; -- Removed */
-    /* --button-operator-hover-bg-dark: #6c6c6c; -- Removed */
     --button-accent-bg-dark: #0A84FF; /* Apple Blue Dark */
     --button-accent-hover-bg-dark: #0060D0; /* Apple Blue Dark Hover */
-    /* --button-danger-bg-dark: #c82333; -- Removed, no longer used */
-    /* --button-danger-hover-bg-dark: #a71d2a; -- Removed, no longer used */
     --border-color-dark: #444446; /* Adjusted Neutral Gray */
     
     /* Accent Colors */
@@ -91,12 +83,8 @@ body {
         --button-hover-dark: #4a4a4c; /* Adjusted Neutral Gray Hover */
         --button-secondary-bg-dark: #48484a; /* Already defined above, ensuring it's here for dark mode context */
         --button-secondary-hover-dark: #58585a; /* Already defined above */
-        /* --button-operator-bg-dark: #545454; -- Removed */
-        /* --button-operator-hover-bg-dark: #6c6c6c; -- Removed */
         --button-accent-bg-dark: var(--accent-blue-dark);
         --button-accent-hover-bg-dark: var(--accent-blue-hover-dark);
-        /* --button-danger-bg-dark: #c82333; -- Removed */
-        /* --button-danger-hover-bg-dark: #a71d2a; -- Removed */
         --border-color-dark: #444446; /* Adjusted Neutral Gray */
         /* --box-shadow-dark is already defined in the main :root and used below */
     }
@@ -384,54 +372,6 @@ button:active {
 @media (prefers-color-scheme: dark) {
     #standard-keys-container button.operator:hover {
         background-color: var(--accent-blue-hover-dark);
-    }
-}
-
-/* Equals button */
-#standard-keys-container button.equals {
-    background-color: var(--button-accent-bg-light);
-    color: white;
-    grid-column: span 2;
-}
-
-@media (prefers-color-scheme: dark) {
-    #standard-keys-container button.equals {
-        background-color: var(--button-accent-bg-dark);
-    }
-}
-
-#standard-keys-container button.equals:hover {
-    background-color: var(--button-accent-hover-bg-light);
-}
-
-@media (prefers-color-scheme: dark) {
-    #standard-keys-container button.equals:hover {
-        background-color: var(--button-accent-hover-bg-dark);
-    }
-}
-
-/* Clear button */
-#standard-keys-container button.clear { /* Keypad AC Button */
-    background-color: var(--button-bg-light);
-    color: var(--accent-blue-light);
-}
-
-@media (prefers-color-scheme: dark) {
-    #standard-keys-container button.clear {
-        background-color: var(--button-bg-dark);
-        color: var(--accent-blue-dark);
-    }
-}
-
-#standard-keys-container button.clear:hover {
-    background-color: var(--button-hover-light);
-    /* color: var(--accent-blue-light); remains unchanged */
-}
-
-@media (prefers-color-scheme: dark) {
-    #standard-keys-container button.clear:hover {
-        background-color: var(--button-hover-dark);
-        /* color: var(--accent-blue-dark); remains unchanged */
     }
 }
 
